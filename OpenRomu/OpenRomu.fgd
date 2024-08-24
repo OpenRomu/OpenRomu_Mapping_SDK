@@ -1,0 +1,262 @@
+//
+// OpenRomu game definition file (.fgd)
+//
+
+//
+// worldspawn
+//
+
+@SolidClass = worldspawn : "This is the world entity. Each map can only contain one, and it's automatically created for you."
+[
+	message(string) : "Map Description / Title"
+	skyname(sky) : "Environment map (cl_skyname)" : : "Lets you choose what sky image you want. Values are: 2desert, alien1, alien2, alien3, black, city, cliff, desert, dusk, morning, neb1, neb2, neb6, neb7, night, space, xen8, xen9, xen10. More skies exist in Half-Life modifications, and you can also make your own skies."
+	sounds(integer) : "CD track to play" : 1 : "CD track to play when the level begins."
+	light(integer) : "Default light level"
+	WaveHeight(string) : "Default Wave Height" : : "Set the default wave height here (can be overridden by the properties in func_water)."
+	MaxRange(string) : "Max viewable distance" : "4096" : "Maximum distance the player can see."
+	chaptertitle(string) : "Chapter Title Message" : "" : "Text displayed when entering the level."
+	startdark(choices) : "Level Fade In" : 0 : "If Yes, then the level will start black and fade into normal light." =
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+	gametitle(choices) : "Display game title" : 0 : "Game title that appears onscreen when this level starts." =
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+	newunit(choices) : "New Level Unit" : 0 : "Used to clear out savegame data of previous levels to keep the savegame size as small as possible. Only set it to Yes if the player cannot return to any previous levels." =
+	[
+		0 : "No, keep current"
+		1 : "Yes, clear previous levels"
+	]
+	mapteams(string) : "Map Team List" : : "This will be copied into the mp_teamlist while your map is running if the server allows maps to override the team list."
+	defaultteam(choices) : "Default Team" : 0 =
+	[
+		0 : "Fewest Players"
+		1 : "First Team"
+	]
+]
+
+//
+// BaseClasses
+//
+
+
+@BaseClass = Angles
+[
+	angles(string) : "Pitch Yaw Roll (Y Z X)" : "0 0 0" : "Sets the pitch (up / down), yaw (left / right) and roll (bank) respectively. The compass in Jackhammer corresponds to Yaw. The settings are not always (or not all) used."
+]
+
+@BaseClass size(0 0 0, 32 32 32) color(80 0 200) base(Appearflags) = Ammo []
+
+@BaseClass = Targetname
+[
+	targetname(target_source) : "Name" : : "Property used to identify entities."
+]
+
+@BaseClass = Target
+[
+	target(target_destination) : "Target" : : "When an entity is activated, it triggers the entity with the name specified by Target."
+]
+
+@BaseClass = Global
+[
+	globalname(string) : "Global Entity Name"
+]
+
+@BaseClass base(Appearflags, Angles) flags(Angle) size(-16 -16 -36, 16 16 36) color(0 255 0) offset(0 0 36) = PlayerClass []
+
+@BaseClass = Light
+[
+	_light(color255) : "Brightness" : "255 255 128 200" : "First three integer numbers are the color (RGB). The fourth number is the brightness."
+	style(Choices) : "Appearance" : 0 : "Light appearance. Values:" =
+	[
+		0 : "Normal"
+		10: "Fluorescent flicker"
+		2 : "Slow, strong pulse"
+		11: "Slow pulse, noblack"
+		5 : "Gentle pulse"
+		1 : "Flicker A"
+		6 : "Flicker B"
+		3 : "Candle A"
+		7 : "Candle B"
+		8 : "Candle C"
+		4 : "Fast strobe"
+		9 : "Slow strobe"
+	]
+	pattern(string) : "Custom Appearance" : : "Use a string of letters to provide a custom light style. The property allows you to enter a string of letters from a to z, representing brightness. If you entered 'abcdefghihgfedcba' then the light would go from bright to dim and back again and then repeat. Complicating things, to use this feature, you must name the light. However, if you then use a trigger to activate it, then it will behave as a normal light."
+]
+
+@BaseClass = RenderFxChoices
+[
+	renderfx(choices) :"Render FX" : 0 =
+	[
+		0: "Normal"
+		1: "Slow Pulse"
+		2: "Fast Pulse"
+		3: "Slow Wide Pulse"
+		4: "Fast Wide Pulse"
+		9: "Slow Strobe"
+		10: "Fast Strobe"
+		11: "Faster Strobe"
+		12: "Slow Flicker"
+		13: "Fast Flicker"
+		5: "Slow Fade Away"
+		6: "Fast Fade Away"
+		7: "Slow Become Solid"
+		8: "Fast Become Solid"
+		14: "Constant Glow"
+		15: "Distort"
+		16: "Hologram (Distort + fade)"
+	]
+]
+
+@BaseClass base(RenderFxChoices) = RenderFields
+[
+	rendermode(choices) : "Render Mode" : 0 =
+	[
+		0: "Normal"
+		1: "Color"
+		2: "Texture"
+		3: "Glow"
+		4: "Solid"
+		5: "Additive"
+	]
+	renderamt(integer) : "FX Amount (1 - 255)"
+	rendercolor(color255) : "FX Color (R G B)" : "0 0 0"
+]
+
+@BaseClass = Appearflags
+[
+	spawnflags(Flags) =
+	[
+		2048 : "Not in Deathmatch" : 0
+	]
+]
+
+@BaseClass = ZHLT
+[
+	zhlt_lightflags(choices) : "ZHLT Lightflags" : 0 =
+	[
+		0 : "Default"
+		1 : "Embedded Fix"
+		2 : "Opaque (blocks light)"
+		3 : "Opaque + Embedded fix"
+		6 : "Opaque + Concave Fix"
+	]
+	light_origin(string) : "Light Origin Target"
+]
+
+@BaseClass = ZHLT_point
+[
+	_fade(string) : "ZHLT Fade" : "1.0"
+	_falloff(choices) : "ZHLT Falloff" : 0 =
+	[
+		0 : "Default"
+		1 : "Inverse Linear"
+		2 : "Inverse Square"
+	]
+]
+
+//
+// lights
+//
+
+@PointClass iconsprite("sprites/light.spr") base(Target, Targetname, Light) flags(Light) = light : "Invisible lightsource."
+[
+	spawnflags(Flags) = [ 1 : "Initially dark" : 0 : "If this is enabled, the entity will need to be triggered to work." ]
+]
+
+@PointClass iconsprite("sprites/lightbulb.spr") base(Targetname, Target, Angles, ZHLT_point) = light_spot : "Spotlight" 
+[
+	_cone(integer) : "Inner (bright) angle" : 30
+	_cone2(integer) : "Outer (fading) angle" : 45
+	pitch(integer) : "Pitch" : -90
+	_light(color255) : "Brightness" : "255 255 128 200"
+	_sky(Choices) : "Is Sky" : 0 = 
+	[ 
+		0 : "No"
+		1 : "Yes"
+	]
+	spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+      style(Choices) : "Appearance" : 0 =
+	[
+		0 : "Normal"
+		10: "Fluorescent flicker"
+		2 : "Slow, strong pulse"
+		11: "Slow pulse, noblack"
+		5 : "Gentle pulse"
+		1 : "Flicker A"
+		6 : "Flicker B"
+		3 : "Candle A"
+		7 : "Candle B"
+		8 : "Candle C"
+		4 : "Fast strobe"
+		9 : "Slow strobe"
+	]
+	pattern(string) : "Custom Appearance"
+]
+
+@PointClass base(Targetname, Angles, ZHLT_point) iconsprite("sprites/light_environment.spr") flags(Light) = light_environment : "This entity makes a map's sky emit light. The only practical way of lighting outdoor maps."
+[
+	pitch(integer) : "Pitch" : 0
+	_light(color255) : "Brightness" : "255 255 128 200"
+]
+
+//
+// Environmental effects
+//
+
+@SolidClass base(Targetname, RenderFields) = func_illusionary : "Fake Wall/Light"
+[
+
+	skin(choices) : "Contents" : -1 =
+	[
+		-1: "Empty"
+		-7: "Volumetric Light"
+	]
+	_minlight(string) : "Minimum light level"
+]
+
+@SolidClass base(Targetname) = func_ladder : "Ladder" []
+
+@SolidClass base(Door) = func_water : "Liquid"
+[
+	spawnflags(flags) =
+	[
+		1 : "Starts Open"
+		256: "Use Only"
+	]
+	skin(choices) : "Contents" : -3 =
+	[
+		-3: "Water"
+		-4: "Slime"
+		-5: "Lava"
+	]
+	WaveHeight(string) : "Wave Height" : "3.2"
+]
+
+//
+// info points
+//
+
+@PointClass base(PlayerClass) sequence(2) studio("models/player.mdl") = info_player_deathmatch : "Player deathmatch start"
+[
+	target(target_destination) : "Target"
+	master(string) : "Master"
+]
+@PointClass base(PlayerClass) sequence(2) studio("models/player.mdl") = info_player_start : "Player 1 start" []
+
+@PointClass base(Targetname) size(-4 -4 -4, 4 4 4) color(200 100 50) = info_target : "Beam Target" []
+@PointClass size(-8 -8 0, 8 8 16) base(PlayerClass, Targetname) = info_teleport_destination : "Teleport destination" []
+
+
+//
+// game entities
+//
+
+@PointClass decal() base(Targetname, Appearflags) = infodecal : "Decal"
+[
+	texture(decal)
+]
