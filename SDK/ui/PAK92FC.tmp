@@ -1,0 +1,310 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1xc8ag3rsdgx"]
+
+[ext_resource type="Theme" uid="uid://cdq75ipxhp4rb" path="res://Theme.tres" id="1_1mie4"]
+[ext_resource type="Script" path="res://ui/PAKBundler.gd" id="2_aknog"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkhk2"]
+bg_color = Color(0.14902, 0.14902, 0.14902, 0.32549)
+
+[node name="PakBundler" type="Node"]
+
+[node name="Bundler" type="Window" parent="."]
+title = "PAKBundler"
+initial_position = 2
+size = Vector2i(654, 800)
+visible = false
+wrap_controls = true
+exclusive = true
+theme = ExtResource("1_1mie4")
+script = ExtResource("2_aknog")
+
+[node name="BG" type="ColorRect" parent="Bundler"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.368627, 0.490196, 0.639216, 1)
+
+[node name="Layout" type="VBoxContainer" parent="Bundler"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+
+[node name="Container" type="MarginContainer" parent="Bundler/Layout"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="BG" type="ColorRect" parent="Bundler/Layout/Container"]
+layout_mode = 2
+color = Color(0.160784, 0.301961, 0.423529, 1)
+
+[node name="Container" type="MarginContainer" parent="Bundler/Layout/Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Layout" type="VBoxContainer" parent="Bundler/Layout/Container/Container"]
+layout_mode = 2
+
+[node name="Level" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/Level"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "BSP Level:"
+
+[node name="LineEdit" type="LineEdit" parent="Bundler/Layout/Container/Container/Layout/Level"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "MyLevel.bsp"
+
+[node name="Button" type="Button" parent="Bundler/Layout/Container/Container/Layout/Level"]
+layout_mode = 2
+text = "Browse"
+
+[node name="Spacer" type="Control" parent="Bundler/Layout/Container/Container/Layout"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Name" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/Name"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="Bundler/Layout/Container/Container/Layout/Name"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+placeholder_text = "MyLevel"
+
+[node name="Author" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/Author"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Author:"
+
+[node name="LineEdit" type="LineEdit" parent="Bundler/Layout/Container/Container/Layout/Author"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+placeholder_text = "User"
+
+[node name="Version" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/Version"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Version:"
+
+[node name="SpinBox" type="SpinBox" parent="Bundler/Layout/Container/Container/Layout/Version"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 999.0
+value = 1.0
+
+[node name="DescriptionLabel" type="Label" parent="Bundler/Layout/Container/Container/Layout"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Description:"
+
+[node name="DescriptionEdit" type="TextEdit" parent="Bundler/Layout/Container/Container/Layout"]
+custom_minimum_size = Vector2(300, 120)
+layout_mode = 2
+placeholder_text = "This map is awesome."
+
+[node name="GameModesLabel" type="Label" parent="Bundler/Layout/Container/Container/Layout"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Game modes:"
+
+[node name="GameModes" type="GridContainer" parent="Bundler/Layout/Container/Container/Layout"]
+layout_mode = 2
+columns = 2
+
+[node name="Deathmatch" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout/GameModes"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Bundler/Layout/Container/Container/Layout/GameModes/Deathmatch"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/GameModes/Deathmatch"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "Deathmatch"
+
+[node name="TeamDeathmatch" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout/GameModes"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Bundler/Layout/Container/Container/Layout/GameModes/TeamDeathmatch"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/GameModes/TeamDeathmatch"]
+layout_mode = 2
+text = "Team Deathmatch"
+
+[node name="CTF" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout/GameModes"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Bundler/Layout/Container/Container/Layout/GameModes/CTF"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/GameModes/CTF"]
+layout_mode = 2
+text = "CTF"
+
+[node name="GunGame" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout/GameModes"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="Bundler/Layout/Container/Container/Layout/GameModes/GunGame"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/GameModes/GunGame"]
+layout_mode = 2
+text = "GunGame"
+
+[node name="License" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/License"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "License:"
+
+[node name="LineEdit" type="LineEdit" parent="Bundler/Layout/Container/Container/Layout/License"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+placeholder_text = "CC BY-NC-SA 4.0"
+
+[node name="WADs" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/WADs"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "WADs:"
+
+[node name="Button" type="Button" parent="Bundler/Layout/Container/Container/Layout/WADs"]
+layout_mode = 2
+text = "Browse"
+
+[node name="WADsList" type="ScrollContainer" parent="Bundler/Layout/Container/Container/Layout"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tkhk2")
+vertical_scroll_mode = 2
+
+[node name="Layout" type="VBoxContainer" parent="Bundler/Layout/Container/Container/Layout/WADsList"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Preview" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/Preview"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "Preview:"
+
+[node name="LineEdit" type="LineEdit" parent="Bundler/Layout/Container/Container/Layout/Preview"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Preview.png"
+
+[node name="Button" type="Button" parent="Bundler/Layout/Container/Container/Layout/Preview"]
+layout_mode = 2
+text = "Browse"
+
+[node name="Sky" type="HBoxContainer" parent="Bundler/Layout/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/Container/Container/Layout/Sky"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "Sky:"
+
+[node name="LineEdit" type="LineEdit" parent="Bundler/Layout/Container/Container/Layout/Sky"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "BlueSky.png"
+
+[node name="Button" type="Button" parent="Bundler/Layout/Container/Container/Layout/Sky"]
+layout_mode = 2
+text = "Browse"
+
+[node name="Spacer2" type="Control" parent="Bundler/Layout/Container/Container/Layout"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="BottomContainer" type="MarginContainer" parent="Bundler/Layout"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Layout" type="VBoxContainer" parent="Bundler/Layout/BottomContainer"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Bundler/Layout/BottomContainer/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.999847, 0.357517, 0.290399, 1)
+
+[node name="OutputFolder" type="HBoxContainer" parent="Bundler/Layout/BottomContainer/Layout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Bundler/Layout/BottomContainer/Layout/OutputFolder"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "PAK Output folder"
+
+[node name="LineEdit" type="LineEdit" parent="Bundler/Layout/BottomContainer/Layout/OutputFolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "C:\\OpenRomuMaps"
+
+[node name="Button" type="Button" parent="Bundler/Layout/BottomContainer/Layout/OutputFolder"]
+layout_mode = 2
+text = "Browse"
+
+[node name="GenerateButton" type="Button" parent="Bundler/Layout/BottomContainer/Layout"]
+layout_mode = 2
+text = "Generate"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(800, 600)
+force_native = true
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+use_native_dialog = true
