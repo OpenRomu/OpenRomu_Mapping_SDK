@@ -13,7 +13,7 @@ func _ready() -> void:
     get_node("Container/Layout/Tree/MarginContainer/Layout/MapEditor").connect("pressed", Callable(self, "openMapEditor"));
     get_node("Container/Layout/Tree/MarginContainer/Layout/ConfigureMapEditor").connect("pressed", Callable(self, "openConfigureMapEditor"));
     get_node("Container/Layout/Tree/MarginContainer/Layout/BundleMap").connect("pressed", Callable(self, "openPAKBundler"));
-    get_node("Container/Layout/Tree/MarginContainer/Layout/OpenFiles").connect("pressed", Callable(self, "openFileExplorer").bind("../OpenRomu"));
+    get_node("Container/Layout/Tree/MarginContainer/Layout/OpenFiles").connect("pressed", Callable(self, "openFileExplorer").bind("OpenRomu"));
     get_node("Container/Layout/Tree/MarginContainer/Layout/Website").connect("pressed", Callable(self, "openWebsite").bind("https://openromu.fr"));
     get_node("Container/Layout/Tree/MarginContainer/Layout/XHLTGithub").connect("pressed", Callable(self, "openWebsite").bind("https://github.com/seedee/SDHLT"));
     # Game version
