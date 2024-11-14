@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://3abyflbnbqjf"]
+
+[ext_resource type="Texture2D" uid="uid://cp3o5aa640tul" path="res://icons/remove.svg" id="1_pf7s1"]
+
+[node name="WadEntry" type="HBoxContainer"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "WadName"
+
+[node name="RemoveButton" type="Button" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="RemoveButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_pf7s1")
