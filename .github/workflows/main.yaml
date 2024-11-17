@@ -47,7 +47,8 @@ jobs:
           godot --headless --export-release "Linux" "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/${{env.EXPORT_NAME}}.x86_64"
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/utils"
           wget $WAD3_CLI_REPO-$LINUX_BUILD_NAME -O "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/utils/wad3-cli"
-          cp -R ../OpenRomu/* "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}"
+          chmod +x "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/utils/wad3-cli"
+          cp -R ../OpenRomu "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}"
           cd "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}" && zip -r "${{env.EXPORT_NAME}}-${{github.ref_name}}-${{env.LINUX_BUILD_NAME}}.zip" "."
       # Release to this repo
       - name: Private Release

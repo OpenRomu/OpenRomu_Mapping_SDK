@@ -14,6 +14,7 @@ config/name="OpenRomu_SDK"
 config/version="1.0.0"
 run/main_scene="res://ui/App.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://logo.png"
 config/macos_native_icon="res://logo.icns"
 config/windows_native_icon="res://logo.ico"
