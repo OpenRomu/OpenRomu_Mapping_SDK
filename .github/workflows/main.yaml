@@ -21,7 +21,7 @@ jobs:
     name: All Platform Export
     runs-on: ubuntu-20.04
     container:
-      image: stalker2106x/godot-ci:4.3-mono
+      image: stalker2106x/godot-ci:4.3
     steps:
       - name: Checkout
         uses: actions/checkout@v4
