@@ -7,27 +7,16 @@ var loadedPAKPath : String;
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     connect("close_requested", Callable(self, "closeRequested"));
-    get_node("Layout/TopContainer/SourcePAKButton").connect("pressed", Callable(self, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILE, ["*.pak"], "file_selected", Callable(self, "PAKSelected")));
-    get_node("Layout/Container/Container/Layout/Level/Button").connect("pressed", Callable(self, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILE, ["*.bsp"], "file_selected", Callable(self, "levelSelected")));
-    get_node("Layout/Container/Container/Layout/WADs/Button").connect("pressed", Callable(self, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILES, ["*.wad"], "files_selected", Callable(self, "WADsSelected")));
-    get_node("Layout/Container/Container/Layout/Preview/Button").connect("pressed", Callable(self, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILE, ["*.bmp", "*.png", "*.jpg", "*.jpeg"], "file_selected", Callable(self, "previewSelected")));
-    get_node("Layout/Container/Container/Layout/Sky/Button").connect("pressed", Callable(self, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILE, ["*.bmp", "*.png", "*.jpg", "*.jpeg"], "file_selected", Callable(self, "skySelected")));
-    get_node("Layout/BottomContainer/Layout/OutputFolder/Button").connect("pressed", Callable(self, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_DIR, [], "dir_selected", Callable(self, "outputSelected")));
+    var app = get_node("/root/App");
+    get_node("Layout/TopContainer/SourcePAKButton").connect("pressed", Callable(app, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILE, ["*.pak"], "file_selected", Callable(self, "PAKSelected")));
+    get_node("Layout/Container/Container/Layout/Level/Button").connect("pressed", Callable(app, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILE, ["*.bsp"], "file_selected", Callable(self, "levelSelected")));
+    get_node("Layout/Container/Container/Layout/WADs/Button").connect("pressed", Callable(app, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILES, ["*.wad"], "files_selected", Callable(self, "WADsSelected")));
+    get_node("Layout/Container/Container/Layout/Preview/Button").connect("pressed", Callable(app, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILE, ["*.bmp", "*.png", "*.jpg", "*.jpeg"], "file_selected", Callable(self, "previewSelected")));
+    get_node("Layout/Container/Container/Layout/Sky/Button").connect("pressed", Callable(app, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_FILE, ["*.bmp", "*.png", "*.jpg", "*.jpeg"], "file_selected", Callable(self, "skySelected")));
+    get_node("Layout/BottomContainer/Layout/OutputFolder/Button").connect("pressed", Callable(app, "openFileBrowser").bind(FileDialog.FILE_MODE_OPEN_DIR, [], "dir_selected", Callable(self, "outputSelected")));
     get_node("Layout/BottomContainer/Layout/GenerateButton").connect("pressed", Callable(self, "validateAndGenerate"));
 
 # File browser callbacks
-
-func openFileBrowser(fileMode : FileDialog.FileMode, filters : Array, signalName : String, callback : Callable):
-    var fileDialog = get_node("../FileDialog");
-    fileDialog.set_current_file("");
-    fileDialog.file_mode = fileMode;
-    fileDialog.filters = filters;
-    # Disconnect signals because it could be linked to another
-    for dict in fileDialog[signalName].get_connections():
-        fileDialog[signalName].disconnect(dict.callable);
-    # Connect
-    fileDialog.connect(signalName, callback);
-    fileDialog.visible = true;
 
 func PAKSelected(pakPath : String):
     loadedPAKPath = pakPath;

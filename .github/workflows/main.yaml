@@ -14,6 +14,7 @@ env:
   LINUX_BUILD_NAME: linux_x86-64
   MACOS_BUILD_FOLDER: macOS_x86-64
   MACOS_BUILD_NAME: macOS_x86-64
+  WAD3_CLI_REPO: https://github.com/Stalker2106x/wad3-cli/releases/download/v1.0.0/wad3-cli
 
 jobs:
   export-game:
@@ -33,6 +34,8 @@ jobs:
           echo "export/windows/rcedit = \"/opt/rcedit-x86.exe\"" >> ~/.config/godot/editor_settings-4.3.tres
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}"
           godot --headless --export-release "Windows Desktop" "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}/${{env.EXPORT_NAME}}.exe"
+          mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}/utils"
+          wget $WAD3_CLI_REPO-$WIN_BUILD_NAME -O "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}/utils/wad3-cli.exe"
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}/OpenRomu"
           cp OpenRomu/* "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}/OpenRomu"
           cd "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}" && zip -r "${{env.EXPORT_NAME}}-${{github.ref_name}}-${{env.WIN_BUILD_NAME}}.zip" "."
@@ -42,6 +45,8 @@ jobs:
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}"
           godot --headless --export-release "Linux/X11" "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/${{env.EXPORT_NAME}}.x86_64"
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/OpenRomu"
+          mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/utils"
+          wget $WAD3_CLI_REPO-$LINUX_BUILD_NAME -O "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/utils/wad3-cli"
           cp OpenRomu/* "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/OpenRomu"
           cd "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}" && zip -r "${{env.EXPORT_NAME}}-${{github.ref_name}}-${{env.LINUX_BUILD_NAME}}.zip" "."
       # MacOS build
