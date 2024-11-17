@@ -44,7 +44,7 @@ jobs:
         run: |
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}"
           cd SDK
-          godot --headless --export-release "Linux/X11" "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/${{env.EXPORT_NAME}}.x86_64"
+          godot --headless --export-release "Linux" "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/${{env.EXPORT_NAME}}.x86_64"
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/utils"
           wget $WAD3_CLI_REPO-$LINUX_BUILD_NAME -O "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/utils/wad3-cli"
           cp -R ../OpenRomu/* "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}"
