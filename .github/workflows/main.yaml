@@ -33,6 +33,7 @@ jobs:
           echo "[resource]" >> ~/.config/godot/editor_settings-4.3.tres
           echo "export/windows/rcedit = \"/opt/rcedit-x86.exe\"" >> ~/.config/godot/editor_settings-4.3.tres
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}"
+          cd SDK
           godot --headless --export-release "Windows Desktop" "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}/${{env.EXPORT_NAME}}.exe"
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}/utils"
           wget $WAD3_CLI_REPO-$WIN_BUILD_NAME -O "${{env.BUILD_PATH_ROOT}}/${{env.WIN_BUILD_FOLDER}}/utils/wad3-cli.exe"
@@ -43,6 +44,7 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}"
+          cd SDK
           godot --headless --export-release "Linux/X11" "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/${{env.EXPORT_NAME}}.x86_64"
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/OpenRomu"
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.LINUX_BUILD_FOLDER}}/utils"
@@ -53,6 +55,7 @@ jobs:
       - name: MacOS Build
         run: |
           mkdir -p "${{env.BUILD_PATH_ROOT}}/${{env.MACOS_BUILD_FOLDER}}"
+          cd SDK
           godot --headless --export-release "macOS" "${{env.BUILD_PATH_ROOT}}/${{env.MACOS_BUILD_FOLDER}}/${{env.EXPORT_NAME}}-${{github.ref_name}}-${{env.MACOS_BUILD_NAME}}.zip"
       # Release to this repo
       - name: Private Release
