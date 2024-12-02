@@ -14,7 +14,7 @@ env:
   LINUX_BUILD_NAME: linux_x86-64
   MACOS_BUILD_FOLDER: macOS_x86-64
   MACOS_BUILD_NAME: macOS_x86-64
-  WAD3_CLI_REPO: https://github.com/Stalker2106x/wad3-cli/releases/download/v1.0.0/wad3-cli
+  WAD3_CLI_REPO: https://github.com/Stalker2106x/wad3-cli/releases/download/v1.0.1/wad3-cli
 
 jobs:
   export-game:
