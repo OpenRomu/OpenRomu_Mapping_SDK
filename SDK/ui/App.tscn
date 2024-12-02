@@ -1,13 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://btdyexglfb10n"]
+[gd_scene load_steps=12 format=3 uid="uid://btdyexglfb10n"]
 
 [ext_resource type="Script" path="res://ui/App.gd" id="1_hhv1a"]
 [ext_resource type="Theme" uid="uid://cdq75ipxhp4rb" path="res://Theme.tres" id="1_l7bc1"]
 [ext_resource type="Texture2D" uid="uid://dy5tmv8378psi" path="res://icons/hammer.svg" id="3_foaay"]
-[ext_resource type="Texture2D" uid="uid://b0xg2iy55i4xp" path="res://icons/settings.svg" id="4_3imtb"]
 [ext_resource type="Texture2D" uid="uid://eqhqhne71kyv" path="res://icons/link.svg" id="5_7fpnb"]
 [ext_resource type="Texture2D" uid="uid://b0rgffjik4kd5" path="res://icons/bundle.svg" id="5_qcihs"]
 [ext_resource type="Texture2D" uid="uid://7j5ndiqj6u5k" path="res://icons/folder_open.svg" id="6_8bp6k"]
 [ext_resource type="PackedScene" uid="uid://b1xc8ag3rsdgx" path="res://ui/PAKBundlerUI.tscn" id="7_s537o"]
+[ext_resource type="PackedScene" uid="uid://uidwmmo8t62w" path="res://ui/ConfigureMapEditorDialog.tscn" id="8_imwcm"]
+[ext_resource type="PackedScene" uid="uid://cowmpgo5m243x" path="res://ui/WADBundlerUI.tscn" id="8_joy2a"]
+[ext_resource type="Script" path="res://ui/AboutDialog.gd" id="10_smpex"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6xwm"]
 bg_color = Color(1, 1, 1, 0)
@@ -34,26 +36,38 @@ grow_vertical = 2
 color = Color(0.368627, 0.490196, 0.639216, 1)
 
 [node name="Container" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+offset_right = 400.0
+offset_bottom = 600.0
+size_flags_vertical = 3
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="Layout" type="VBoxContainer" parent="Container"]
 layout_mode = 2
 
-[node name="Tree" type="ColorRect" parent="Container/Layout"]
+[node name="MenuBar" type="MenuBar" parent="Container/Layout"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/h_separation = 15
+
+[node name="File" type="PopupMenu" parent="Container/Layout/MenuBar"]
+item_count = 1
+item_0/text = "Configure map editor"
+
+[node name="?" type="PopupMenu" parent="Container/Layout/MenuBar"]
+auto_translate_mode = 1
+item_count = 1
+item_0/text = "About SDK"
+
+[node name="Panel" type="ColorRect" parent="Container/Layout"]
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.160784, 0.301961, 0.423529, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Container/Layout/Tree"]
+[node name="MarginContainer" type="MarginContainer" parent="Container/Layout/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,21 +80,21 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Layout" type="VBoxContainer" parent="Container/Layout/Tree/MarginContainer"]
+[node name="Layout" type="VBoxContainer" parent="Container/Layout/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="MappingTitle" type="Label" parent="Container/Layout/Tree/MarginContainer/Layout"]
+[node name="MappingTitle" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_l6xwm")
 text = "Mapping"
 
-[node name="MapEditor" type="Button" parent="Container/Layout/Tree/MarginContainer/Layout"]
+[node name="MapEditor" type="Button" parent="Container/Layout/Panel/MarginContainer/Layout"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="Layout" type="HBoxContainer" parent="Container/Layout/Tree/MarginContainer/Layout/MapEditor"]
+[node name="Layout" type="HBoxContainer" parent="Container/Layout/Panel/MarginContainer/Layout/MapEditor"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,22 +103,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Container/Layout/Tree/MarginContainer/Layout/MapEditor/Layout"]
+[node name="Icon" type="TextureRect" parent="Container/Layout/Panel/MarginContainer/Layout/MapEditor/Layout"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_foaay")
-expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Container/Layout/Tree/MarginContainer/Layout/MapEditor/Layout"]
+[node name="Label" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout/MapEditor/Layout"]
 layout_mode = 2
 text = "Run map editor"
 
-[node name="ConfigureMapEditor" type="Button" parent="Container/Layout/Tree/MarginContainer/Layout"]
+[node name="BundleMap" type="Button" parent="Container/Layout/Panel/MarginContainer/Layout"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="Layout" type="HBoxContainer" parent="Container/Layout/Tree/MarginContainer/Layout/ConfigureMapEditor"]
+[node name="Layout" type="HBoxContainer" parent="Container/Layout/Panel/MarginContainer/Layout/BundleMap"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,45 +126,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Container/Layout/Tree/MarginContainer/Layout/ConfigureMapEditor/Layout"]
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_3imtb")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="Container/Layout/Tree/MarginContainer/Layout/ConfigureMapEditor/Layout"]
-layout_mode = 2
-text = "Configure map editor"
-
-[node name="BundleMap" type="Button" parent="Container/Layout/Tree/MarginContainer/Layout"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="Layout" type="HBoxContainer" parent="Container/Layout/Tree/MarginContainer/Layout/BundleMap"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Icon" type="TextureRect" parent="Container/Layout/Tree/MarginContainer/Layout/BundleMap/Layout"]
+[node name="Icon" type="TextureRect" parent="Container/Layout/Panel/MarginContainer/Layout/BundleMap/Layout"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5_qcihs")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Container/Layout/Tree/MarginContainer/Layout/BundleMap/Layout"]
+[node name="Label" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout/BundleMap/Layout"]
 layout_mode = 2
 text = "Bundle map to .PAK"
 
-[node name="OpenFiles" type="Button" parent="Container/Layout/Tree/MarginContainer/Layout"]
+[node name="Textures" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_l6xwm")
+text = "Textures"
+
+[node name="BundleWAD" type="Button" parent="Container/Layout/Panel/MarginContainer/Layout"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="Layout" type="HBoxContainer" parent="Container/Layout/Tree/MarginContainer/Layout/OpenFiles"]
+[node name="Layout" type="HBoxContainer" parent="Container/Layout/Panel/MarginContainer/Layout/BundleWAD"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,28 +156,58 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Container/Layout/Tree/MarginContainer/Layout/OpenFiles/Layout"]
+[node name="Icon" type="TextureRect" parent="Container/Layout/Panel/MarginContainer/Layout/BundleWAD/Layout"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_qcihs")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout/BundleWAD/Layout"]
+layout_mode = 2
+text = "Bundle textures in .WAD"
+
+[node name="OtherTitle" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_l6xwm")
+text = "Other"
+
+[node name="OpenFiles" type="Button" parent="Container/Layout/Panel/MarginContainer/Layout"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Layout" type="HBoxContainer" parent="Container/Layout/Panel/MarginContainer/Layout/OpenFiles"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Container/Layout/Panel/MarginContainer/Layout/OpenFiles/Layout"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("6_8bp6k")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Container/Layout/Tree/MarginContainer/Layout/OpenFiles/Layout"]
+[node name="Label" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout/OpenFiles/Layout"]
 layout_mode = 2
 text = "Open SDK folder (fgd, cfg, ...)"
 
-[node name="LinksTitle" type="Label" parent="Container/Layout/Tree/MarginContainer/Layout"]
+[node name="LinksTitle" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_l6xwm")
 text = "Links"
 
-[node name="Website" type="Button" parent="Container/Layout/Tree/MarginContainer/Layout"]
+[node name="Website" type="Button" parent="Container/Layout/Panel/MarginContainer/Layout"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="Layout" type="HBoxContainer" parent="Container/Layout/Tree/MarginContainer/Layout/Website"]
+[node name="Layout" type="HBoxContainer" parent="Container/Layout/Panel/MarginContainer/Layout/Website"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -190,22 +216,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Container/Layout/Tree/MarginContainer/Layout/Website/Layout"]
+[node name="Icon" type="TextureRect" parent="Container/Layout/Panel/MarginContainer/Layout/Website/Layout"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5_7fpnb")
-expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Container/Layout/Tree/MarginContainer/Layout/Website/Layout"]
+[node name="Label" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout/Website/Layout"]
 layout_mode = 2
 text = "OpenRomu website"
 
-[node name="XHLTGithub" type="Button" parent="Container/Layout/Tree/MarginContainer/Layout"]
+[node name="XHLTGithub" type="Button" parent="Container/Layout/Panel/MarginContainer/Layout"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="Layout" type="HBoxContainer" parent="Container/Layout/Tree/MarginContainer/Layout/XHLTGithub"]
+[node name="Layout" type="HBoxContainer" parent="Container/Layout/Panel/MarginContainer/Layout/XHLTGithub"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -214,14 +239,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Container/Layout/Tree/MarginContainer/Layout/XHLTGithub/Layout"]
+[node name="Icon" type="TextureRect" parent="Container/Layout/Panel/MarginContainer/Layout/XHLTGithub/Layout"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5_7fpnb")
-expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Container/Layout/Tree/MarginContainer/Layout/XHLTGithub/Layout"]
+[node name="Label" type="Label" parent="Container/Layout/Panel/MarginContainer/Layout/XHLTGithub/Layout"]
 layout_mode = 2
 text = "GoldSrc compile tools (SDHLT)"
 
@@ -243,55 +267,8 @@ fit_to_longest_item = false
 item_count = 1
 popup/item_0/text = "v1.3.x"
 
-[node name="ConfigureMapEditorDialog" type="ConfirmationDialog" parent="."]
-title = "Configure map editor"
-initial_position = 2
-size = Vector2i(500, 161)
-force_native = true
-
-[node name="Container" type="MarginContainer" parent="ConfigureMapEditorDialog"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="ColorRect" type="ColorRect" parent="ConfigureMapEditorDialog/Container"]
-layout_mode = 2
-color = Color(0.160784, 0.301961, 0.423529, 1)
-
-[node name="Container" type="MarginContainer" parent="ConfigureMapEditorDialog/Container"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Layout" type="VBoxContainer" parent="ConfigureMapEditorDialog/Container/Container"]
-layout_mode = 2
-
-[node name="Message" type="RichTextLabel" parent="ConfigureMapEditorDialog/Container/Container/Layout"]
-layout_mode = 2
-text = "Select the editor to use with the SDK.
-Use \"...\" button and select your preferred program executable.
-
-"
-fit_content = true
-
-[node name="Layout" type="HBoxContainer" parent="ConfigureMapEditorDialog/Container/Container/Layout"]
-layout_mode = 2
-
-[node name="PathInput" type="LineEdit" parent="ConfigureMapEditorDialog/Container/Container/Layout/Layout"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="BrowseButton" type="Button" parent="ConfigureMapEditorDialog/Container/Container/Layout/Layout"]
-layout_mode = 2
-text = "..."
+[node name="ConfigureMapEditorDialog" parent="." instance=ExtResource("8_imwcm")]
+visible = false
 
 [node name="BrowseMapEditorDialog" type="FileDialog" parent="."]
 title = "Open a File"
@@ -303,4 +280,48 @@ file_mode = 0
 access = 2
 use_native_dialog = true
 
+[node name="WADBundlerUI" parent="." instance=ExtResource("8_joy2a")]
+
 [node name="PakBundlerUI" parent="." instance=ExtResource("7_s537o")]
+
+[node name="FileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Open a File"
+initial_position = 2
+size = Vector2i(800, 600)
+force_native = true
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+use_native_dialog = true
+
+[node name="AboutDialog" type="Window" parent="."]
+title = "About SDK"
+initial_position = 2
+size = Vector2i(500, 310)
+visible = false
+transient = true
+force_native = true
+script = ExtResource("10_smpex")
+
+[node name="ColorRect" type="ColorRect" parent="AboutDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.368627, 0.490196, 0.639216, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AboutDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font size=35]OpenRomu SDK[/font][font size=15]v1.0.0[/font]
+
+The OpenRomu SDK is a powerful toolkit designed to help creators mod and build custom maps and assets for the OpenRomu game.
+The OpenRomu SDK is maintained and updated by a dedicated community of modders, developers, and fans of OpenRomu. We welcome contributions and ideas to continuously improve the toolkit. Join us in shaping the future of OpenRomu through your creations!
+
+For more information, tutorials, and support, visit our community hub using the link in main window of SDK"

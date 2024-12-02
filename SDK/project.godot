@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="OpenRomu_SDK"
-config/version="1.0.0"
+config/version="1.0.1"
 run/main_scene="res://ui/App.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://logo.png"
 config/macos_native_icon="res://logo.icns"
 config/windows_native_icon="res://logo.ico"
@@ -22,3 +23,7 @@ config/windows_native_icon="res://logo.ico"
 
 window/size/viewport_width=400
 window/size/viewport_height=600
+
+[dotnet]
+
+project/assembly_name="OpenRomu_SDK"

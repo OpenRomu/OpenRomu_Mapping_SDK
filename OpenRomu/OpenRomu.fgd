@@ -208,6 +208,19 @@
 // Environmental effects
 //
 
+@SolidClass base(Targetname, Appearflags, RenderFields, Global, ZHLT) = func_wall : "Wall" 
+[
+	_minlight(string) : "Minimum light level"
+]
+
+@SolidClass base(Targetname, Appearflags, RenderFields, Global, ZHLT) = func_weather : "Weather" 
+[
+	type(Choices) : "Type" : 0 =
+	[
+		0 : "Snow"
+	]
+]
+
 @SolidClass base(Targetname, RenderFields) = func_illusionary : "Fake Wall/Light"
 [
 

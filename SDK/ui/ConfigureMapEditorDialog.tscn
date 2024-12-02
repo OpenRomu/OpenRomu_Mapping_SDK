@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=3 uid="uid://uidwmmo8t62w"]
+
+[ext_resource type="Script" path="res://ui/ConfigureMapEditorDialog.gd" id="1_jppys"]
+
+[node name="ConfigureMapEditorDialog" type="Window"]
+auto_translate_mode = 1
+title = "Configure map editor"
+initial_position = 2
+size = Vector2i(500, 215)
+script = ExtResource("1_jppys")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.368627, 0.490196, 0.639216, 1)
+
+[node name="Container" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ColorRect" type="ColorRect" parent="Container"]
+layout_mode = 2
+color = Color(0.160784, 0.301961, 0.423529, 1)
+
+[node name="Container" type="MarginContainer" parent="Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Layout" type="VBoxContainer" parent="Container/Container"]
+layout_mode = 2
+
+[node name="Message" type="RichTextLabel" parent="Container/Container/Layout"]
+layout_mode = 2
+text = "Select the editor to use with the SDK.
+Use \"...\" button and select your preferred program executable.
+
+"
+fit_content = true
+
+[node name="Layout" type="HBoxContainer" parent="Container/Container/Layout"]
+layout_mode = 2
+
+[node name="PathInput" type="LineEdit" parent="Container/Container/Layout/Layout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BrowseButton" type="Button" parent="Container/Container/Layout/Layout"]
+layout_mode = 2
+text = "..."
+
+[node name="Spacer" type="Control" parent="Container/Container/Layout"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Container/Container/Layout"]
+layout_mode = 2
+alignment = 1
+
+[node name="CancelButton" type="Button" parent="Container/Container/Layout/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Cancel"
+
+[node name="Control" type="Control" parent="Container/Container/Layout/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="ApplyButton" type="Button" parent="Container/Container/Layout/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Apply"

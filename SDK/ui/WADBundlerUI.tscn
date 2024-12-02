@@ -1,0 +1,109 @@
+[gd_scene load_steps=3 format=3 uid="uid://cowmpgo5m243x"]
+
+[ext_resource type="Theme" uid="uid://cdq75ipxhp4rb" path="res://Theme.tres" id="1_qpobq"]
+[ext_resource type="Script" path="res://ui/WADBundlerUI.gd" id="2_7ou0q"]
+
+[node name="WADBundlerUI" type="Node"]
+
+[node name="BundlerWindow" type="Window" parent="."]
+title = "Generate WAD"
+initial_position = 2
+size = Vector2i(600, 328)
+visible = false
+wrap_controls = true
+exclusive = true
+force_native = true
+theme = ExtResource("1_qpobq")
+script = ExtResource("2_7ou0q")
+
+[node name="BG" type="ColorRect" parent="BundlerWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.368627, 0.490196, 0.639216, 1)
+
+[node name="Container" type="MarginContainer" parent="BundlerWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="BG" type="ColorRect" parent="BundlerWindow/Container"]
+layout_mode = 2
+color = Color(0.160784, 0.301961, 0.423529, 1)
+
+[node name="Container" type="MarginContainer" parent="BundlerWindow/Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Layout" type="VBoxContainer" parent="BundlerWindow/Container/Container"]
+layout_mode = 2
+
+[node name="SourceFolderLabel" type="Label" parent="BundlerWindow/Container/Container/Layout"]
+layout_mode = 2
+text = "Select a folder containing the textures to bundle"
+
+[node name="SourceFolder" type="HBoxContainer" parent="BundlerWindow/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="BundlerWindow/Container/Container/Layout/SourceFolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="BundlerWindow/Container/Container/Layout/SourceFolder"]
+layout_mode = 2
+text = "Browse"
+
+[node name="Recursive" type="HBoxContainer" parent="BundlerWindow/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="BundlerWindow/Container/Container/Layout/Recursive"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BundlerWindow/Container/Container/Layout/Recursive"]
+layout_mode = 2
+text = "Select all textures recursively"
+
+[node name="Control" type="Control" parent="BundlerWindow/Container/Container/Layout"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OutputWADLabel" type="Label" parent="BundlerWindow/Container/Container/Layout"]
+layout_mode = 2
+text = "Select the output WAD file"
+
+[node name="OutputWAD" type="HBoxContainer" parent="BundlerWindow/Container/Container/Layout"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="BundlerWindow/Container/Container/Layout/OutputWAD"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="BundlerWindow/Container/Container/Layout/OutputWAD"]
+layout_mode = 2
+text = "Browse"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BundlerWindow/Container/Container/Layout"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="StatusLabel" type="RichTextLabel" parent="BundlerWindow/Container/Container/Layout/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="BundleButton" type="Button" parent="BundlerWindow/Container/Container/Layout"]
+layout_mode = 2
+text = "Generate WAD"
