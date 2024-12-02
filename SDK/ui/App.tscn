@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://btdyexglfb10n"]
+[gd_scene load_steps=12 format=3 uid="uid://btdyexglfb10n"]
 
 [ext_resource type="Script" path="res://ui/App.gd" id="1_hhv1a"]
 [ext_resource type="Theme" uid="uid://cdq75ipxhp4rb" path="res://Theme.tres" id="1_l7bc1"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b1xc8ag3rsdgx" path="res://ui/PAKBundlerUI.tscn" id="7_s537o"]
 [ext_resource type="PackedScene" uid="uid://uidwmmo8t62w" path="res://ui/ConfigureMapEditorDialog.tscn" id="8_imwcm"]
 [ext_resource type="PackedScene" uid="uid://cowmpgo5m243x" path="res://ui/WADBundlerUI.tscn" id="8_joy2a"]
+[ext_resource type="Script" path="res://ui/AboutDialog.gd" id="10_smpex"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6xwm"]
 bg_color = Color(1, 1, 1, 0)
@@ -301,6 +302,7 @@ size = Vector2i(500, 310)
 visible = false
 transient = true
 force_native = true
+script = ExtResource("10_smpex")
 
 [node name="ColorRect" type="ColorRect" parent="AboutDialog"]
 anchors_preset = 15
